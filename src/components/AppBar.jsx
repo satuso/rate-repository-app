@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   text: {
-    color: theme.colors.light,
+    color: 'white',
     fontWeight: theme.fontWeights.bold,
     fontSize: theme.fontSizes.subheading,
   },
