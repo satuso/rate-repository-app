@@ -1,18 +1,8 @@
 import React from 'react';
-import { TextInput as NativeTextInput, StyleSheet } from 'react-native';
-
-const styles = StyleSheet.create({
-  input: {
-    backgroundColor: 'white',
-    borderRadius: '5px',
-    border: '1px solid gray',
-    padding: 10,
-    margin: 10
-  }
-});
+import { TextInput as NativeTextInput } from 'react-native';
 
 const TextInput = ({...props }) => {
-  return <NativeTextInput style={styles.input} {...props} />;
+  return <NativeTextInput {...props} />;
 };
 
 export default TextInput;
