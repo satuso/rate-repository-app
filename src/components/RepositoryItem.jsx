@@ -9,15 +9,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     display: 'flex',
     alignItems: 'flex-start',
-    width: '100%',
-    flexWrap: 'wrap',
-    paddingRight: 10
-  },
-  description: {
-    color: 'gray',
-    fontWeight: theme.fontWeights.bold,
-    fontSize: theme.fontSizes.subheading,
-    width: '100%'
+    paddingRight: 10,
+    flexWrap: 'wrap'
   },
   img: {
     width: 50,
@@ -40,7 +33,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'flex-start',
     paddingLeft: 10,
-    paddingBottom: 10
+    paddingBottom: 10,
+    flexShrink: 1
   },
   row: {
     display: 'flex',
