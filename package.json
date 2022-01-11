@@ -11,7 +11,7 @@
     "lint": "eslint ./src/**/*.{js,jsx} App.js --no-error-on-unmatched-pattern"
   },
   "dependencies": {
-    "expo": "~44.0.0",
+    "expo": "~42.0.1",
     "expo-status-bar": "~1.2.0",
     "formik": "^2.2.9",
     "react": "^17.0.2",

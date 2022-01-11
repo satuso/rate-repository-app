@@ -11,15 +11,17 @@ const styles = StyleSheet.create({
   },
   error: {
     backgroundColor: 'white',
-    borderRadius: '5px',
-    border: '1px solid #d73a4a',
+    borderRadius: 5,
+    borderColor: '#d73a4a',
+    borderWidth: 2,
     padding: 10,
     margin: 10,
   },
   input: {
     backgroundColor: 'white',
-    borderRadius: '5px',
-    border: '1px solid gray',
+    borderRadius: 5,
+    borderColor: 'gray',
+    borderWidth: 1,
     padding: 10,
     margin: 10,
   }

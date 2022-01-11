@@ -26,10 +26,12 @@ const SignInForm = ({ onSubmit }) => {
       padding: 10,
       borderRadius: 5,
       margin: 10,
-      textAlign: 'center'
+      display: 'flex',
+      alignItems: 'center'
     },
     text: {
-      color: 'white'
+      color: 'white',
+      fontFamily: theme.fonts.fontFamily
     }
   });
   

@@ -9,16 +9,18 @@ const styles = StyleSheet.create({
     paddingTop: Constants.statusBarHeight,
     padding: 10,
     backgroundColor: theme.colors.primary,
-    height: '80px',
+    height: 120,
     display: 'flex',
     alignItems: 'center',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    fontFamily: theme.fonts.main,
   },
   text: {
     color: 'white',
     fontWeight: theme.fontWeights.bold,
     fontSize: theme.fontSizes.subheading,
-    padding: 10
+    padding: 10,
+    fontFamily: theme.fonts.fontFamily
   },
 });
 

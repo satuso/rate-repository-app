@@ -5,12 +5,13 @@ import theme from '../theme';
 const styles = StyleSheet.create({
   container: {
     paddingTop: 10,
-    paddingLeft: '10px',
+    paddingLeft: 10,
     backgroundColor: 'white',
     display: 'flex',
     alignItems: 'flex-start',
     paddingRight: 10,
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    fontFamily: theme.fonts.fontFamily
   },
   img: {
     width: 50,
@@ -20,13 +21,15 @@ const styles = StyleSheet.create({
   bold: {
     fontWeight: theme.fontWeights.bold,
     paddingBottom: 8,
+    fontFamily: theme.fonts.fontFamily
   },
   language: {
     backgroundColor: theme.colors.secondary,
     color: 'white',
     padding: 5,
     borderRadius: 5,
-    marginTop: 10
+    marginTop: 10,
+    fontFamily: theme.fonts.fontFamily
   },
   column: {
     display: 'flex',
@@ -46,9 +49,11 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     width: '100%'
+  },
+  text: {
+    fontFamily: theme.fonts.fontFamily
   }
 });
-
 
 const RepositoryItem = ({ 
   fullName,
@@ -91,19 +96,19 @@ const RepositoryItem = ({
         <View style={styles.endRow}>
         <View style={styles.column}>
             <Text style={styles.bold}>{formatNumber(stargazersCount)}</Text>
-            <Text>Stars</Text>
+            <Text style={styles.text}>Stars</Text>
           </View>
           <View style={styles.column}>
             <Text style={styles.bold}>{formatNumber(forksCount)}</Text>
-            <Text>Forks</Text>
+            <Text style={styles.text}>Forks</Text>
           </View>
           <View style={styles.column}>
             <Text style={styles.bold}>{reviewCount}</Text>
-            <Text>Reviews</Text>
+            <Text style={styles.text}>Reviews</Text>
           </View>
           <View style={styles.column}>
             <Text style={styles.bold}>{ratingAverage}</Text>
-            <Text>Rating</Text>
+            <Text style={styles.text}>Rating</Text>
           </View>
       </View>
     </View>
