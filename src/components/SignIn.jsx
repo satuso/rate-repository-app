@@ -5,6 +5,7 @@ import { Formik } from 'formik';
 import theme from '../theme';
 import * as yup from 'yup';
 import useSignIn from '../hooks/useSignIn';
+import { useHistory } from 'react-router-native';
 
 const validationSchema = yup.object().shape({
   username: yup
@@ -49,13 +50,15 @@ const SignInForm = ({ onSubmit }) => {
 
 const SignIn = () => {
   const [signIn] = useSignIn();
+  const navigate = useHistory();
 
-const onSubmit = async (values) => {
+  const onSubmit = async (values) => {
     const { username, password } = values;
 
     try {
       const { data } = await signIn({ username, password });
       console.log(data);
+      navigate.push('/');
     } catch (e) {
       console.log(e);
     }
