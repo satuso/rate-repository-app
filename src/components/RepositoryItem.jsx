@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: 10,
     paddingLeft: 10,
-    backgroundColor: 'white',
+    backgroundColor: theme.colors.bg,
     display: 'flex',
     alignItems: 'flex-start',
     paddingRight: 10,
@@ -23,9 +23,9 @@ const styles = StyleSheet.create({
     paddingBottom: 8,
     fontFamily: theme.fonts.fontFamily
   },
-  language: {
+  button: {
     backgroundColor: theme.colors.secondary,
-    color: 'white',
+    color: theme.colors.bg,
     padding: 5,
     borderRadius: 5,
     marginTop: 10,
@@ -55,24 +55,8 @@ const styles = StyleSheet.create({
   }
 });
 
-const RepositoryItem = ({ 
-  fullName,
-  description,
-  language,
-  forksCount,
-  stargazersCount, 
-  ratingAverage,
-  reviewCount,
-  ownerAvatarUrl
-}) => {
-
+const RepositoryItem = ({ repository }) => {
   const formatNumber = (num) => {
-    if (num >= 1000000000) {
-       return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
-    }
-    if (num >= 1000000) {
-       return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
-    }
     if (num >= 1000) {
        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
     } 
@@ -80,34 +64,34 @@ const RepositoryItem = ({
   };
 
   return (
-    <View style={styles.container}>
+    <View testID='repositoryItem' style={styles.container}>
       <View style={styles.row}>
         <Image
           style={styles.img}
           source={{
-            uri: ownerAvatarUrl}}
+            uri: repository.ownerAvatarUrl}}
         />
       <View style={styles.column}>
-        <Text style={styles.bold}>{fullName}</Text>
-        <Text style={styles.text}>{description}</Text>
-        <Text style={styles.language}>{language}</Text>
+        <Text style={styles.bold}>{repository.fullName}</Text>
+        <Text style={styles.text}>{repository.description}</Text>
+        <Text style={styles.button}>{repository.language}</Text>
       </View>
       </View>
         <View style={styles.endRow}>
         <View style={styles.column}>
-            <Text style={styles.bold}>{formatNumber(stargazersCount)}</Text>
+            <Text style={styles.bold}>{formatNumber(repository.stargazersCount)}</Text>
             <Text style={styles.text}>Stars</Text>
           </View>
           <View style={styles.column}>
-            <Text style={styles.bold}>{formatNumber(forksCount)}</Text>
+            <Text style={styles.bold}>{formatNumber(repository.forksCount)}</Text>
             <Text style={styles.text}>Forks</Text>
           </View>
           <View style={styles.column}>
-            <Text style={styles.bold}>{reviewCount}</Text>
+            <Text style={styles.bold}>{repository.reviewCount}</Text>
             <Text style={styles.text}>Reviews</Text>
           </View>
           <View style={styles.column}>
-            <Text style={styles.bold}>{ratingAverage}</Text>
+            <Text style={styles.bold}>{repository.ratingAverage}</Text>
             <Text style={styles.text}>Rating</Text>
           </View>
       </View>
