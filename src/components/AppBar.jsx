@@ -42,7 +42,6 @@ const AppBar = () => {
     history.push('/login');
   };
 
-  console.log(data);
   return (
     <View style={styles.container}>
       <ScrollView horizontal>

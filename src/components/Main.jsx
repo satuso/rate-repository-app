@@ -1,8 +1,9 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
+import { Route, Switch, Redirect } from 'react-router-native';
 import AppBar from './AppBar';
 import RepositoryList from './RepositoryList';
-import { Route, Switch, Redirect } from 'react-router-native';
+import SingleRepositoryItem from './SingleRepositoryItem';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 
@@ -19,14 +20,17 @@ const Main = () => {
     <View style={styles.container}>
       <AppBar />
       <Switch>
+        <Route path="/signin" exact>
+          <SignIn />
+        </Route>
+        <Route path="/signup" exact>
+          <SignUp />
+        </Route>
         <Route path="/" exact>
           <RepositoryList />
         </Route>
-        <Route path="/signin">
-          <SignIn />
-        </Route>
-        <Route path="/signup">
-          <SignUp />
+        <Route path="/:id" exact>
+          <SingleRepositoryItem />
         </Route>
         <Redirect to="/" />
       </Switch>
