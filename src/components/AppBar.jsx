@@ -57,9 +57,14 @@ const AppBar = () => {
             <Text style={styles.text}>Sign Up</Text>
           </Link>
         </> : 
+        <>
+          <Link to="/createreview">
+            <Text style={styles.text}>Create a review</Text>
+            </Link> 
           <Link onPress={handleSignOut}>
             <Text style={styles.text}>Sign Out</Text>
           </Link>
+        </>
         }
       </ScrollView>
     </View>

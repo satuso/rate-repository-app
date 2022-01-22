@@ -3,6 +3,7 @@ import { useParams } from 'react-router-native';
 import RepositoryItem from './RepositoryItem';
 import { useQuery } from '@apollo/client';
 import { GET_REPOSITORY } from '../graphql/queries';
+//import useRepository from '../hooks/useRepository';
 import { View, Text, Pressable, StyleSheet, FlatList } from 'react-native';
 import * as Linking from 'expo-linking';
 import theme from '../theme';
@@ -97,8 +98,8 @@ const ReviewItem = ({ review }) => {
 const SingleRepository = () => {
   const { id } = useParams();
   const { data } = useQuery(GET_REPOSITORY, {
-    variables: { id },
-    fetchPolicy: 'cache-and-network'
+    fetchPolicy: 'cache-and-network',
+    variables: { id }
   });
 
   if (!data) return null;
