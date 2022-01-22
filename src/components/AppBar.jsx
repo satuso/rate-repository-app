@@ -39,7 +39,7 @@ const AppBar = () => {
   const handleSignOut = async () => {
     await authStorage.removeAccessToken();
     apolloClient.resetStore();
-    history.push('/login');
+    history.push('/');
   };
 
   return (
