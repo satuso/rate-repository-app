@@ -4,6 +4,8 @@ import RepositoryItem from './RepositoryItem';
 import useRepositories from '../hooks/useRepositories';
 import { useHistory } from 'react-router-native';
 import MenuComponent from './MenuComponent';
+import SearchBar from './SearchBar';
+import { useDebounce } from 'use-debounce';
 
 const styles = StyleSheet.create({
   separator: {
@@ -42,12 +44,19 @@ export const RepositoryListContainer = ({ repositories }) => {
 
 const RepositoryList = () => {
   const [sort, setSort] = useState();
-  const variables = { ...sort };
+  const [filter, setFilter] = useState('');
+  
+  const [search] = useDebounce(filter, 500);
+
+  const variables = { ...sort, searchKeyword: search };
   const { repositories } = useRepositories({ variables });
 
-  console.log(variables);
   return (
     <>
+      <SearchBar 
+        filter={filter}
+        setFilter={setFilter} 
+      />
       <MenuComponent setSort={setSort} />
       <RepositoryListContainer
         repositories={repositories}
