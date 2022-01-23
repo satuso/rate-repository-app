@@ -6,10 +6,25 @@ import { GET_REPOSITORIES } from '../graphql/queries';
 const useRepositories = ({ variables }) => {
   const [repositories, setRepositories] = useState();
 
-  const { data, loading } = useQuery(GET_REPOSITORIES, {
+  const { data, loading, fetchMore } = useQuery(GET_REPOSITORIES, {
     fetchPolicy: 'cache-and-network',
     variables
   });
+
+  const handleFetchMore = () => {
+    const canFetchMore = !loading && data?.repositories.pageInfo.hasNextPage;
+
+    if (!canFetchMore) {
+      return;
+    }
+
+    fetchMore({
+      variables: {
+        after: data.repositories.pageInfo.endCursor,
+        ...variables,
+      },
+    });
+  };
 
   const fetchRepositories = async () => {
     if (data) setRepositories(data.repositories);
@@ -19,7 +34,7 @@ const useRepositories = ({ variables }) => {
     if (data) fetchRepositories();
   }, [data]);
 
-  return { repositories, loading, fetchRepositories };
+  return { repositories, loading, fetchRepositories, fetchMore: handleFetchMore };
 };
 
 export default useRepositories;

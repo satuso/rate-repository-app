@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-export const RepositoryListContainer = ({ repositories }) => {
+export const RepositoryListContainer = ({ repositories, onEndReach }) => {
   const repositoryNodes = repositories
     ? repositories.edges.map((edge) => edge.node)
     : [];
@@ -37,6 +37,8 @@ export const RepositoryListContainer = ({ repositories }) => {
           <RepositoryItem item={item}/>
         </Pressable>}
       keyExtractor={item => item.id}
+      onEndReached={onEndReach}
+      onEndReachedThreshold={0.5}
     />
     </View>
   );
@@ -45,11 +47,15 @@ export const RepositoryListContainer = ({ repositories }) => {
 const RepositoryList = () => {
   const [sort, setSort] = useState();
   const [filter, setFilter] = useState('');
-  
+
   const [search] = useDebounce(filter, 500);
 
-  const variables = { ...sort, searchKeyword: search };
-  const { repositories } = useRepositories({ variables });
+  const variables = { ...sort, searchKeyword: search, first: 8 };
+  const { repositories, fetchMore } = useRepositories({ variables });
+
+  const onEndReach = () => {
+    fetchMore();
+  };
 
   return (
     <>
@@ -61,6 +67,7 @@ const RepositoryList = () => {
       <RepositoryListContainer
         repositories={repositories}
         setSort={setSort}
+        onEndReach={onEndReach}
       />
     </>
   );

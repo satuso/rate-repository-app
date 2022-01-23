@@ -67,10 +67,20 @@ const styles = StyleSheet.create({
 });
 
 const RepositoryInfo = ({ repository }) => {
+
+  const handlePress = async () => {
+    const supported = await Linking.canOpenURL(`${repository.url}`);
+    if (supported) {
+      await Linking.openURL(`${repository.url}`);
+    } else {
+      console.log(`Can't open URL: ${repository.url}`);
+    }
+  };
+
   return (
     <View style={styles.bg}>
     <RepositoryItem item={repository} />
-    <Pressable style={styles.button} onPress={() => Linking.canOpenURL(`${repository.url}`)}>
+    <Pressable style={styles.button} onPress={handlePress}>
       <Text style={styles.text}>Open in Github</Text>
     </Pressable>
     </View>
@@ -95,14 +105,19 @@ const ReviewItem = ({ review }) => {
 
 const SingleRepository = () => {
   const { id } = useParams();
-  const repository = useRepository(id);
+  const variables = { id, first: 8 };
+  const { repository, fetchMore } = useRepository({ variables });
 
-  if (!repository) {
-    return null;
-  }
+  const singleRepository = repository
+    ? repository
+    : [];
 
-  const reviews = repository.reviews
-    ? repository.reviews.edges.map(edge => edge.node)
+  const onEndReach = () => {
+    fetchMore();
+  };
+
+  const reviews = repository
+    ? singleRepository.reviews.edges.map(edge => edge.node)
     : [];
 
   return (
@@ -110,7 +125,8 @@ const SingleRepository = () => {
       data={reviews}
       renderItem={({ item }) => <ReviewItem review={item} />}
       keyExtractor={({ id }) => id}
-      ListHeaderComponent={() => <RepositoryInfo repository={repository} />}
+      ListHeaderComponent={() => <RepositoryInfo repository={singleRepository} />}
+      onEndReached={onEndReach}
     />
   );
 };
