@@ -5,7 +5,6 @@ import useRepository from '../hooks/useRepository';
 import { View, Text, Pressable, StyleSheet, FlatList } from 'react-native';
 import * as Linking from 'expo-linking';
 import theme from '../theme';
-import { useHistory } from 'react-router-native';
 
 const styles = StyleSheet.create({
   column: {
@@ -97,10 +96,8 @@ const ReviewItem = ({ review }) => {
 const SingleRepository = () => {
   const { id } = useParams();
   const repository = useRepository(id);
-  const history = useHistory();
 
   if (!repository) {
-    history.push('/');
     return null;
   }
 

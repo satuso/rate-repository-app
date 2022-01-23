@@ -83,7 +83,9 @@ const CreateReview = () => {
     const ratingNumber = Number(rating);
     try {
       const data = await createReview({ repositoryName, ownerName, rating: ratingNumber, text });
-      history.push(`/${data.repositoryId}`);
+      if (data) {
+        history.push(`/${data.repositoryId}`);
+      }
     } catch (e) {
       console.log(e);
     }
