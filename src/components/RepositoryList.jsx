@@ -25,7 +25,7 @@ export const RepositoryListContainer = ({ repositories }) => {
       ItemSeparatorComponent={ItemSeparator}
       renderItem={({ item }) => 
         <Pressable onPress={() => history.push(item.id)}>
-          <RepositoryItem repository={item}/>
+          <RepositoryItem item={item}/>
         </Pressable>}
       keyExtractor={item => item.id}
     />

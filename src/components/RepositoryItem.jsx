@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   }
 });
 
-const RepositoryItem = ({ repository }) => {
+const RepositoryItem = ({ item }) => {
   const formatNumber = (num) => {
     if (num >= 1000) {
        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
@@ -69,29 +69,29 @@ const RepositoryItem = ({ repository }) => {
         <Image
           style={styles.img}
           source={{
-            uri: repository.ownerAvatarUrl}}
+            uri: item.ownerAvatarUrl}}
         />
       <View style={styles.column}>
-        <Text style={styles.bold}>{repository.fullName}</Text>
-        <Text style={styles.text}>{repository.description}</Text>
-        <Text style={styles.button}>{repository.language}</Text>
+        <Text style={styles.bold}>{item.fullName}</Text>
+        <Text style={styles.text}>{item.description}</Text>
+        <Text style={styles.button}>{item.language}</Text>
       </View>
       </View>
         <View style={styles.endRow}>
         <View style={styles.column}>
-            <Text style={styles.bold}>{formatNumber(repository.stargazersCount)}</Text>
+            <Text style={styles.bold}>{formatNumber(item.stargazersCount)}</Text>
             <Text style={styles.text}>Stars</Text>
           </View>
           <View style={styles.column}>
-            <Text style={styles.bold}>{formatNumber(repository.forksCount)}</Text>
+            <Text style={styles.bold}>{formatNumber(item.forksCount)}</Text>
             <Text style={styles.text}>Forks</Text>
           </View>
           <View style={styles.column}>
-            <Text style={styles.bold}>{repository.reviewCount}</Text>
+            <Text style={styles.bold}>{item.reviewCount}</Text>
             <Text style={styles.text}>Reviews</Text>
           </View>
           <View style={styles.column}>
-            <Text style={styles.bold}>{repository.ratingAverage}</Text>
+            <Text style={styles.bold}>{item.ratingAverage}</Text>
             <Text style={styles.text}>Rating</Text>
           </View>
       </View>

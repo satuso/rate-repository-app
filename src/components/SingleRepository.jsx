@@ -1,12 +1,11 @@
 import React from 'react';
 import { useParams } from 'react-router-native';
 import RepositoryItem from './RepositoryItem';
-import { useQuery } from '@apollo/client';
-import { GET_REPOSITORY } from '../graphql/queries';
-//import useRepository from '../hooks/useRepository';
+import useRepository from '../hooks/useRepository';
 import { View, Text, Pressable, StyleSheet, FlatList } from 'react-native';
 import * as Linking from 'expo-linking';
 import theme from '../theme';
+import { useHistory } from 'react-router-native';
 
 const styles = StyleSheet.create({
   column: {
@@ -71,7 +70,7 @@ const styles = StyleSheet.create({
 const RepositoryInfo = ({ repository }) => {
   return (
     <View style={styles.bg}>
-    <RepositoryItem repository={repository} />
+    <RepositoryItem item={repository} />
     <Pressable style={styles.button} onPress={() => Linking.canOpenURL(`${repository.url}`)}>
       <Text style={styles.text}>Open in Github</Text>
     </Pressable>
@@ -97,17 +96,16 @@ const ReviewItem = ({ review }) => {
 
 const SingleRepository = () => {
   const { id } = useParams();
-  const { data } = useQuery(GET_REPOSITORY, {
-    fetchPolicy: 'cache-and-network',
-    variables: { id }
-  });
+  const repository = useRepository(id);
+  const history = useHistory();
 
-  if (!data) return null;
-
-  const repository = data.repository ? data.repository : [];
+  if (!repository) {
+    history.push('/');
+    return null;
+  }
 
   const reviews = repository.reviews
-    ? repository.reviews.edges.map((edge) => edge.node)
+    ? repository.reviews.edges.map(edge => edge.node)
     : [];
 
   return (
